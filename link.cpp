@@ -512,6 +512,10 @@ void urdfLink::createLink(bool hideCollisionLinks,bool convexDecomposeNonConvexC
         if (hideCollisionLinks)
             simSetObjectIntParameter(nLinkCollision,10,256); // we "hide" that object in layer 9
     }
+
+    // Force special property: detectable (no effect via nLinkCollision)
+    int p=simGetObjectSpecialProperty(nLinkVisual);
+    simSetObjectSpecialProperty(nLinkVisual, p|sim_objectspecialproperty_detectable_all);
 }
 
 int urdfLink::scaleShapeIfRequired(int shapeHandle,float scalingFactors[3])
